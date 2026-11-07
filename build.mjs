@@ -1,11 +1,15 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 import {marked} from 'marked';
 import katex from 'katex';
 import {chromium} from 'playwright';
 
 const root=path.dirname(fileURLToPath(import.meta.url));
+const assetVersion=file=>createHash('sha256').update(fs.readFileSync(path.join(root,'assets',file))).digest('hex').slice(0,12);
+const styleVersion=assetVersion('style.css');
+const themeVersion=assetVersion('theme.js');
 const chapters=['00-intro.md','01-lower-bound.md','02-counting.md','03-radix.md','04-review.md'];
 const escapeHtml=s=>s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
 const nav=[];
@@ -39,7 +43,7 @@ function renderChapter(file,index){
 let content=chapters.map(renderChapter).join('\n');
 if(mathErrors.length){console.error(mathErrors.join('\n'));process.exit(1)}
 const toc=nav.map(x=>`<a class="${x.sub?'sub':''}" href="#${x.id}">${escapeHtml(x.title)}</a>`).join('\n');
-const html=`<!doctype html><html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="جزوهٔ فارسی و خودآموز مرتب‌سازی در زمان خطی: کران پایین، Counting Sort و Radix Sort"><title>مرتب‌سازی در زمان خطی | جزوه الگوریتم</title><script>try{const saved=localStorage.getItem("sorting-theme");document.documentElement.dataset.theme=saved||((matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light")}catch{document.documentElement.dataset.theme="light"}</script><link rel="stylesheet" href="assets/katex.min.css"><link rel="stylesheet" href="assets/style.css"></head><body><div class="layout"><aside class="sidebar"><div class="brand">مرتب‌سازی در زمان خطی<small>جزوهٔ درس الگوریتم و ساختمان داده<br>بر اساس ۲۵ اسلاید Sorting.pdf</small></div><nav class="toc"><div class="toc-title">فهرست مطالب</div>${toc}</nav><details class="mobile-toc"><summary>فهرست مطالب</summary><nav class="toc">${toc}</nav></details><div class="actions"><button class="theme-toggle" type="button" aria-pressed="false">حالت تیره</button><a href="guide.pdf">دریافت PDF</a><a href="https://github.com/artamote/sorting-linear-time-fa">فایل‌های منبع</a></div></aside><main class="book"><header class="hero"><div class="eyebrow">الگوریتم و ساختمان داده</div><h1>مرتب‌سازی در زمان خطی</h1><p>از کران پایینِ روش‌های مقایسه‌ای تا Counting Sort و Radix Sort</p><div class="meta"><span>فارسی و خودآموز</span><span>با اثبات و مثال حل‌شده</span><span>بر پایهٔ ۲۵ اسلاید</span></div></header>${content}<footer class="footer">منبع اصلی: Sorting.pdf، «Sorting in Linear Time» — توضیحات تکمیلی و اصلاح‌های آموزشی در متن مشخص شده‌اند.</footer></main></div><script src="assets/theme.js" defer></script></body></html>`;
+const html=`<!doctype html><html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="جزوهٔ فارسی و خودآموز مرتب‌سازی در زمان خطی: کران پایین، Counting Sort و Radix Sort"><title>مرتب‌سازی در زمان خطی | جزوه الگوریتم</title><script>try{const saved=localStorage.getItem("sorting-theme");document.documentElement.dataset.theme=saved||((matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light")}catch{document.documentElement.dataset.theme="light"}</script><link rel="stylesheet" href="assets/katex.min.css"><link rel="stylesheet" href="assets/style.css?v=${styleVersion}"></head><body><div class="layout"><aside class="sidebar"><div class="brand">مرتب‌سازی در زمان خطی<small>جزوهٔ درس الگوریتم و ساختمان داده<br>بر اساس ۲۵ اسلاید Sorting.pdf</small></div><nav class="toc"><div class="toc-title">فهرست مطالب</div>${toc}</nav><details class="mobile-toc"><summary>فهرست مطالب</summary><nav class="toc">${toc}</nav></details><div class="actions"><button class="theme-toggle" type="button" aria-pressed="false">حالت تیره</button><a href="guide.pdf">دریافت PDF</a><a href="https://github.com/artamote/sorting-linear-time-fa">فایل‌های منبع</a></div></aside><main class="book"><header class="hero"><div class="eyebrow">الگوریتم و ساختمان داده</div><h1>مرتب‌سازی در زمان خطی</h1><p>از کران پایینِ روش‌های مقایسه‌ای تا Counting Sort و Radix Sort</p><div class="meta"><span>فارسی و خودآموز</span><span>با اثبات و مثال حل‌شده</span><span>بر پایهٔ ۲۵ اسلاید</span></div></header>${content}<footer class="footer">منبع اصلی: Sorting.pdf، «Sorting in Linear Time» — توضیحات تکمیلی و اصلاح‌های آموزشی در متن مشخص شده‌اند.</footer></main></div><script src="assets/theme.js?v=${themeVersion}" defer></script></body></html>`;
 fs.writeFileSync(path.join(root,'index.html'),html);
 console.log('Built index.html');
 if(process.argv.includes('--pdf')){
