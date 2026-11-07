@@ -21,7 +21,30 @@
 <a class="sub" href="#chapter-4-section-2">۴٫۲ پرسش‌های خود اسلایدها</a>
 <a class="sub" href="#chapter-4-section-3">۴٫۳ تمرین‌های تکمیلی</a>
 <a class="sub" href="#chapter-4-section-4">۴٫۴ پاسخ تشریحی تمرین‌ها</a>
-<a class="sub" href="#chapter-4-section-5">۴٫۵ برگهٔ مرور یک‌دقیقه‌ای</a></nav><div class="actions"><a href="guide.pdf">دریافت PDF</a><a href="https://github.com/artamote/sorting-linear-time-fa">فایل‌های منبع</a></div></aside><main class="book"><header class="hero"><div class="eyebrow">الگوریتم و ساختمان داده</div><h1>مرتب‌سازی در زمان خطی</h1><p>از کران پایینِ روش‌های مقایسه‌ای تا Counting Sort و Radix Sort</p><div class="meta"><span>فارسی و خودآموز</span><span>با اثبات و مثال حل‌شده</span><span>بر پایهٔ ۲۵ اسلاید</span></div></header><section class="chapter" id="chapter-0"><span class="chapter-mark">راهنما</span><h1>مرتب‌سازی در زمان خطی</h1>
+<a class="sub" href="#chapter-4-section-5">۴٫۵ برگهٔ مرور یک‌دقیقه‌ای</a></nav><details class="mobile-toc"><summary>فهرست مطالب</summary><nav class="toc"><a class="" href="#chapter-0">مرتب‌سازی در زمان خطی</a>
+<a class="sub" href="#chapter-0-section-1">نقشهٔ راه</a>
+<a class="" href="#chapter-1">۱. چرا مرتب‌سازی مقایسه‌ای کران پایین دارد؟</a>
+<a class="sub" href="#chapter-1-section-1">۱٫۱ مرور روش‌هایی که تا اینجا دیده‌ایم</a>
+<a class="sub" href="#chapter-1-section-2">۱٫۲ مدل مقایسه و پرسش اسلاید</a>
+<a class="sub" href="#chapter-1-section-3">۱٫۳ درخت تصمیم</a>
+<a class="sub" href="#chapter-1-section-4">۱٫۴ اثبات کران پایین، گام‌به‌گام</a>
+<a class="" href="#chapter-2">۲. Counting Sort: مرتب‌سازی با شمردن</a>
+<a class="sub" href="#chapter-2-section-1">۲٫۱ فرض مسئله و ایده</a>
+<a class="sub" href="#chapter-2-section-2">۲٫۲ سه مرحلهٔ الگوریتم</a>
+<a class="sub" href="#chapter-2-section-3">۲٫۳ مثال کامل اسلایدهای ۱۴ تا ۱۶</a>
+<a class="sub" href="#chapter-2-section-4">۲٫۴ چرا درست است و چرا پایدار است؟</a>
+<a class="sub" href="#chapter-2-section-5">۲٫۵ زمان، حافظه و محدودیت عملی</a>
+<a class="" href="#chapter-3">۳. Radix Sort: مرتب‌سازی رقم‌به‌رقم</a>
+<a class="sub" href="#chapter-3-section-1">۳٫۱ چرا از یک رقم شروع می‌کنیم؟</a>
+<a class="sub" href="#chapter-3-section-2">۳٫۲ شبه‌کد و ناوردای درست‌بودن</a>
+<a class="sub" href="#chapter-3-section-3">۳٫۳ مثال کامل اسلاید ۲۳</a>
+<a class="sub" href="#chapter-3-section-4">۳٫۴ زمان اجرا و شرایط خطی بودن</a>
+<a class="" href="#chapter-4">۴. جمع‌بندی و تمرین</a>
+<a class="sub" href="#chapter-4-section-1">۴٫۱ تصویر کلی درس</a>
+<a class="sub" href="#chapter-4-section-2">۴٫۲ پرسش‌های خود اسلایدها</a>
+<a class="sub" href="#chapter-4-section-3">۴٫۳ تمرین‌های تکمیلی</a>
+<a class="sub" href="#chapter-4-section-4">۴٫۴ پاسخ تشریحی تمرین‌ها</a>
+<a class="sub" href="#chapter-4-section-5">۴٫۵ برگهٔ مرور یک‌دقیقه‌ای</a></nav></details><div class="actions"><a href="guide.pdf">دریافت PDF</a><a href="https://github.com/artamote/sorting-linear-time-fa">فایل‌های منبع</a></div></aside><main class="book"><header class="hero"><div class="eyebrow">الگوریتم و ساختمان داده</div><h1>مرتب‌سازی در زمان خطی</h1><p>از کران پایینِ روش‌های مقایسه‌ای تا Counting Sort و Radix Sort</p><div class="meta"><span>فارسی و خودآموز</span><span>با اثبات و مثال حل‌شده</span><span>بر پایهٔ ۲۵ اسلاید</span></div></header><section class="chapter" id="chapter-0"><span class="chapter-mark">راهنما</span><h1>مرتب‌سازی در زمان خطی</h1>
 <p><strong>جزوهٔ خودآموز درس الگوریتم و ساختمان داده</strong><br>بر پایهٔ فایل <em>Sorting.pdf</em>، شامل ۲۵ اسلاید «Sorting in Linear Time»</p>
 <p>این جزوه برای کسی نوشته شده است که مرتب‌سازی درجی، ادغامی و سریع را در حد مقدماتی دیده است. مسیر درس از یک پرسش شروع می‌شود: اگر مرتب‌سازی مقایسه‌ای در بدترین حالت به <span class="katex"><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">Ω</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop">lo<span style="margin-right:0.0139em;">g</span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span> زمان نیاز دارد، چطور Counting Sort و Radix Sort گاهی در زمان خطی کار می‌کنند؟ پاسخ در <strong>فرض‌های اضافی دربارهٔ کلیدها</strong> و <strong>روش به‌دست‌آوردن اطلاعات ترتیب</strong> است.</p>
 <h2 id="chapter-0-section-1">نقشهٔ راه</h2>
