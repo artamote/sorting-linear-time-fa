@@ -4,7 +4,7 @@
 
 ## خروجی‌ها
 
-- [نسخهٔ وب](index.html) — فهرست پیمایشی و طراحی واکنش‌گرا؛ نشانی GitHub Pages پس از انتشار: `https://artamote.github.io/sorting-linear-time-fa/`
+- [نسخهٔ وب](https://artamote.github.io/sorting-linear-time-fa/) — فهرست پیمایشی و طراحی واکنش‌گرا
 - [PDF مناسب چاپ](guide.pdf) — A4، ۱۲ صفحه، فونت‌های جاسازی‌شده
 - [نگاشت اسلایدها به جزوه](COVERAGE.md)
 
